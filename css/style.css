@@ -572,7 +572,8 @@
 		#header
 		{
 			position: relative;
-			background: #d64760;
+			background:	url('../images/fore.png');
+			/*background: #BE245A;*/
 			color: #fff;
 		}
 		
