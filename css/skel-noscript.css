@@ -5,8 +5,7 @@
 /* Box Model */
 
 footer {
-			margin-top: 200px;
-			position: relative;
+			position: absolute;
 			
 }
 
