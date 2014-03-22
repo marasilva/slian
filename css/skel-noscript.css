@@ -4,10 +4,7 @@
 
 /* Box Model */
 
-footer {
-			position: absolute;
-			
-}
+
 
 	*, *:before, *:after {
 		-moz-box-sizing: border-box;

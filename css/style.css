@@ -31,6 +31,11 @@
 			font-family: 'Source Sans Pro';
 			font-weight: 300;
 		}
+
+		footer{
+			 bottom: 0;
+            position: fixed;
+		}
 		
 		body:after
 		{
@@ -599,6 +604,4 @@
 			opacity: .95;
 			margin-right: 5px;
 			margin-left: 5px;
-			position: relative;
-			z-index: 1;
 		}
