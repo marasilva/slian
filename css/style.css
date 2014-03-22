@@ -599,4 +599,6 @@
 			opacity: .95;
 			margin-right: 5px;
 			margin-left: 5px;
+			position: relative;
+			z-index: 1;
 		}
