@@ -597,4 +597,6 @@
 		.disqusWrapper {
 			background-color: #ecf0f1;
 			opacity: .95;
+			margin-right: 10px;
+			margin-left: 10px;
 		}
