@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.itpeople.pt/geny/models/appModel" xmlns:common="http://www.itpeople.pt/geny/models/common" xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" xmlns:xjc="http://java.sun.com/xml/ns/jaxb/xjc" targetNamespace="http://www.itpeople.pt/geny/models/appModel" elementFormDefault="qualified" jaxb:extensionBindingPrefixes="xjc" jaxb:version="1.0">
+   <xs:import namespace="http://www.itpeople.pt/geny/models/common" schemaLocation="Common.xsd" />
+   
+   <xs:annotation>
+      <xs:appinfo>
+         <jaxb:schemaBindings>
+            <jaxb:package name="pt.itpeople.geny.itpeople.models.app" />
+         </jaxb:schemaBindings>
+      </xs:appinfo>
+   </xs:annotation>
+   
+   <xs:element name="App" type="AppDefinition" />
+   
+   <xs:complexType name="AppDefinition">
+      <xs:complexContent>
+         <xs:extension base="common:BaseType">
+            <xs:sequence>
+               <xs:element name="Actions" type="ActionsCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="Events" type="EventsCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="Repositories" type="RepositoriesCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="Managers" type="ManagersCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="Screens" type="ScreensCollectionType" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+            <xs:attribute name="BaseNamespace" type="xs:string" use="required" />
+            <xs:attribute name="BaseAndroidProjectSrcPath" type="xs:string" use="optional" />
+            <xs:attribute name="BaseSwiftProjectPath" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="AppBaseType">
+      <xs:complexContent>
+         <xs:extension base="common:BaseType">
+            <xs:attribute name="AvailableInAndroid" type="xs:boolean" use="optional" default="true" />
+            <xs:attribute name="AvailableInSwift" type="xs:boolean" use="optional" default="true" />
+            <xs:attribute name="AvailableInWindowsPhone" type="xs:boolean" use="optional" default="true" />
+            <xs:attribute name="AvailableInWindows" type="xs:boolean" use="optional" default="true" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ScreensCollectionType">
+      <xs:choice minOccurs="1" maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="Screens" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="MapScreen" type="MapScreenType" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="ListScreen" type="ListScreenType" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="PreferencesScreen" type="PreferencesScreenType" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="CustomScreen" type="CustomScreenType" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="DetailScreen" type="DetailScreenType" minOccurs="0" maxOccurs="unbounded" />
+         <xs:element name="LoginScreen" type="LoginScreenType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+   </xs:complexType>
+   
+   <xs:complexType name="MapScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ListScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="PreferencesScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="CustomScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="DetailScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="LoginScreenType">
+      <xs:complexContent>
+         <xs:extension base="ScreenBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ScreenBaseType">
+      <xs:complexContent>
+         <xs:extension base="common:BaseType">
+            <xs:sequence>
+               <xs:element name="HandleEvents" type="HandleEventsCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="SendActions" type="SendActionsCollectionType" minOccurs="0" maxOccurs="1" />
+               <xs:element name="Arguments" type="ArgumentsCollectionType" minOccurs="0" maxOccurs="1" />
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="HandleEventsCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:element name="HandleEvent" type="HandleEventType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="HandleEventType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="SendActionsCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:element name="SendAction" type="SendActionType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="SendActionType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ArgumentsCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:element name="Argument" type="ArgumentType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="ArgumentType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="Type" type="common:TypeChoice" />
+            </xs:sequence>
+            <xs:attribute name="Nullable" type="xs:boolean" use="optional" default="false" />
+            <xs:attribute name="DefaultValue" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ActionsCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="Actions" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="Action" type="ActionType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="ActionType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="Attributes" type="AttributeCollection" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="ApiCallBased" type="xs:boolean" use="optional" default="false" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="EventsCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="Events" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="Event" type="EventType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="EventType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="Attributes" type="AttributeCollection" minOccurs="0" />
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="RepositoriesCollectionType">
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="Repositories" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="MemoryCacheRepository" type="MemoryCacheRepositoryType" minOccurs="0" />
+         <xs:element name="PreferencesDataRepository" type="PreferencesDataRepositoryType" minOccurs="0" />
+         <xs:element name="FileRepository" type="FileRepositoryType" minOccurs="0" />
+         <xs:element name="ApiRepository" type="ApiRepositoryType" minOccurs="0" />
+         <xs:element name="CustomRepository" type="CustomRepositoryType" minOccurs="0" />
+      </xs:choice>
+   </xs:complexType>
+   
+   <xs:complexType name="ManagersCollectionType">
+      <xs:sequence minOccurs="0" maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="Managers" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="Manager" type="ManagerType" minOccurs="1" maxOccurs="unbounded" />
+      </xs:sequence>
+   </xs:complexType>
+   
+   <xs:complexType name="ManagerType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="HandleActions" type="HandleActionCollection" minOccurs="0" />
+               <xs:element name="SendEvents" type="SendEventsCollection" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="Singleton" type="xs:boolean" use="optional" default="true" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="HandleActionCollection">
+      <xs:choice maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="HandleActions" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="HandleAction" type="HandleActionType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+   </xs:complexType>
+   
+   <xs:complexType name="HandleActionType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:attribute name="HandleThread" type="HandleThreadType" use="optional" default="Async" />
+            <xs:attribute name="UseApiCallHandler" type="xs:boolean" use="optional" default="true" />
+            <xs:attribute name="RequiresCompleteInitialization" type="xs:boolean" use="optional" default="true" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="SendEventsCollection">
+      <xs:choice maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="SendEvents" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="SendEvent" type="SendEventType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+   </xs:complexType>
+   
+   <xs:complexType name="SendEventType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:attribute name="Sticky" type="xs:boolean" use="optional" default="false" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="AttributeCollection">
+      <xs:choice maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="AttributeList" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="Attribute" type="AttributeType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+   </xs:complexType>
+   
+   <xs:complexType name="AttributeType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="Type" type="common:TypeChoice" />
+            </xs:sequence>
+            <xs:attribute name="Nullable" type="xs:boolean" use="optional" default="false" />
+            <xs:attribute name="DefaultValue" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="BaseRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="common:BaseType">
+            <xs:attribute name="Singleton" type="xs:boolean" use="optional" default="true" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="MemoryCacheRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="BaseRepositoryType">
+            <xs:choice maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:appinfo>
+                     <jaxb:property name="Caches" />
+                  </xs:appinfo>
+               </xs:annotation>
+               <xs:element name="ObjectCache" type="ObjectCacheType" minOccurs="0" maxOccurs="unbounded" />
+               <xs:element name="ListCache" type="ListCacheType" minOccurs="0" maxOccurs="unbounded" />
+               <xs:element name="DictionaryCache" type="DictionaryCacheType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ObjectCacheType">
+      <xs:complexContent>
+         <xs:extension base="CacheTypeBase">
+            <xs:sequence>
+               <xs:element name="Type" type="common:TypeChoice" />
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ListCacheType">
+      <xs:complexContent>
+         <xs:extension base="CacheTypeBase">
+            <xs:sequence>
+               <xs:element name="Type" type="common:TypeChoice" />
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="DictionaryCacheType">
+      <xs:complexContent>
+         <xs:extension base="CacheTypeBase">
+            <xs:sequence>
+               <xs:element name="KeyType" type="KeyTypeType" />
+               <xs:element name="ValueType" type="common:TypeChoice" />
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="KeyTypeType">
+      <xs:complexContent>
+         <xs:extension base="common:TypeChoice">
+            <xs:attribute name="KeyAttribute" type="xs:string" use="required" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:element name="Type" type="common:TypeChoice" />
+   
+   <xs:complexType name="CacheTypeBase">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="PreferencesDataRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="BaseRepositoryType">
+            <xs:choice maxOccurs="unbounded">
+               <xs:annotation>
+                  <xs:appinfo>
+                     <jaxb:property name="PreferenceData" />
+                  </xs:appinfo>
+               </xs:annotation>
+               <xs:element name="Data" type="PreferenceDataType" minOccurs="0" maxOccurs="unbounded" />
+            </xs:choice>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="PreferenceDataType">
+      <xs:complexContent>
+         <xs:extension base="AppBaseType">
+            <xs:sequence>
+               <xs:element name="Type" type="common:TypeChoice" />
+               <xs:element name="KeyParts" type="KeyPartsCollection" minOccurs="0" />
+            </xs:sequence>
+            <xs:attribute name="Prefix" type="xs:string" use="optional" />
+            <xs:attribute name="DefaultValue" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="KeyPartsCollection">
+      <xs:choice maxOccurs="unbounded">
+         <xs:annotation>
+            <xs:appinfo>
+               <jaxb:property name="KeyParts" />
+            </xs:appinfo>
+         </xs:annotation>
+         <xs:element name="KeyPart" type="KeyPartType" minOccurs="0" maxOccurs="unbounded" />
+      </xs:choice>
+      <xs:attribute name="UserLanguage" type="xs:boolean" use="optional" default="false" />
+   </xs:complexType>
+   
+   <xs:complexType name="KeyPartType">
+      <xs:complexContent>
+         <xs:extension base="common:BaseType">
+            <xs:sequence minOccurs="0" maxOccurs="1">
+               <xs:element name="Type" type="common:TypeChoice" />
+            </xs:sequence>
+            <xs:attribute name="InferredFromOtherArgument" type="xs:boolean" use="optional" default="false" />
+            <xs:attribute name="OtherPreferenceId" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="FileRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="BaseRepositoryType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="CustomRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="BaseRepositoryType" />
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:complexType name="ApiRepositoryType">
+      <xs:complexContent>
+         <xs:extension base="BaseRepositoryType">
+            <xs:attribute name="ApiKey" type="xs:string" use="optional" />
+            <xs:attribute name="ServiceId" type="xs:string" use="optional" />
+            <xs:attribute name="ApiId" type="xs:string" use="optional" />
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   
+   <xs:simpleType name="HandleThreadType">
+      <xs:restriction base="xs:string">
+         <xs:enumeration value="Background" />
+         <xs:enumeration value="Async" />
+      </xs:restriction>
+   </xs:simpleType>
+</xs:schema>
